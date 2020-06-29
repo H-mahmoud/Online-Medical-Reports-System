@@ -1,0 +1,302 @@
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #ebf5ff;
+}
+.card0 {
+    box-shadow: 0px 4px 8px 0px #757575;
+    border-radius: 0px;
+    opacity: 0px;
+}
+
+.card2 {
+    margin: 0px 40px
+}
+
+.logo {
+    width: 200px;
+    height: 100px;
+    margin-top: 20px;
+    margin-left: 35px
+}
+
+.image {
+    width: 360px;
+    height: 280px
+}
+
+.border-line {
+    border-right: 1px solid #EEEEEE
+}
+
+.line {
+    height: 1px;
+    width: 45%;
+    background-color: #E0E0E0;
+    margin-top: 10px
+}
+
+.or {
+    width: 10%;
+    font-weight: bold
+}
+
+.text-sm {
+    font-size: 14px !important
+}
+
+::placeholder {
+    color: #BDBDBD;
+    opacity: 1;
+    font-weight: 300
+}
+
+:-ms-input-placeholder {
+    color: #BDBDBD;
+    font-weight: 300
+}
+
+::-ms-input-placeholder {
+    color: #BDBDBD;
+    font-weight: 300
+}
+
+input,
+textarea {
+    padding: 10px 12px 10px 12px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px
+}
+
+input:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #3bbbb4;
+    outline-width: 0
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+a {
+    color: inherit;
+    cursor: pointer
+}
+
+.btn-blue {
+    background-color: #3bbbb4;
+    width: 150px;
+    color: #fff;
+    border-radius: 2px
+}
+
+.btn-blue:hover {
+    background-color: #4177ab;
+    color: white;
+    cursor: pointer;
+}
+
+.bg {
+    color: #fff;
+    background-color: #3bbbb4;
+}
+
+@media screen and (max-width: 991px) {
+    .logo {
+        margin-left: 0px
+    }
+
+    .image {
+        width: 300px;
+        height: 220px
+    }
+
+    .border-line {
+        border-right: none
+    }
+
+    .card2 {
+        border-top: 1px solid #EEEEEE !important;
+        margin: 0px 15px
+    }
+}
+
+.navbar {
+    background-color: #3bbbb4;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 4px 4px 0px #cbcbcb;
+    
+}
+
+.doctor_info{
+    background-color: white;
+    padding: 2%;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px 0px #cbcbcb;
+}
+
+.doctor_info img {
+    border-radius: 160px;
+    width: 220px;
+}
+
+.doctor_info ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+.doctor_report{
+    margin-top: 5%;
+    background-color: white;
+    padding: 2%;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px 0px #cbcbcb;
+}
+
+.se-nav{
+    padding: 20px;
+    font-family: serif;
+    font-size: 18px;
+    text-decoration: none;
+    
+}
+
+.se-nav:hover{
+    color: #3bbbb4;
+    border-bottom: 3px solid #3bbbb4;
+    text-decoration: none;
+}
+
+.profile_search{
+    
+}
+
+.profile_search input{
+    border: 2px solid #3bbbb4;
+    height: 50px;
+    
+}
+
+.profile_search button{
+    height: 50px;
+    width: 100px;
+    color: white;
+    font-weight: bold;
+    background-color: #3bbbb4;
+    
+}
+
+.btn:hover{
+    color: white;
+    background-color: #4177ab;
+}
+
+.report_table{
+    font-family: serif;
+    font-size: 18px;
+}
+
+.report_table .id{
+    width: 40px;
+    text-decoration: underline;
+    font-weight: bold;
+    background-color: #3bbbb4;
+    text-align: center;
+    color: white;
+}
+
+.report_table .date{
+    text-align: right;
+    width: 200px;
+}
+
+.report_table .r_info{
+    padding-left: 20px; 
+}
+
+.share_btn{
+    color: white;
+    background-color: #3bbbb4;
+}
+
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #3bbbb4;
+  color: white;
+  border: 1px solid #3bbbb4;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.btn2 {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.shared_from{
+    text-align: right;
+}
+
+.navbar-brand:hover{
+    color: white;
+    
+}
+
+.btn-success{
+    background-color: #3bbbb4;
+}
+
+.btn-success:hover{
+    background-color: #26938d;
+}
