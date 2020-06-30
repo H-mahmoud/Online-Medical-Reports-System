@@ -20,7 +20,12 @@ class report{
         
     } 
     
-    public function view(){} 
+    
+    public function view($userid){} 
+    
+    public function viewshared($userid){}
+    
+    public function display($id, $userid){}
     
     public function find($name){
         $name = Validate::secure($name);
