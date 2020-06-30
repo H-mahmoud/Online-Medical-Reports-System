@@ -1,3 +1,22 @@
+<?php
+include(realpath(dirname(__FILE__)).'\..\lib\autoload.php');
+use controller\guest;
+use controller\doctor;
+
+if(session_status()==PHP_SESSION_NONE) session_start();
+
+if(isset($_SESSION['login'])){
+    header("Location: profile.php", true, 301);
+    exit();
+}
+
+if(!isset($_SESSION['object']))
+    $_SESSION['object'] = new guest();
+
+$op = $_SESSION['object'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,19 +48,37 @@
                         <div class="line"></div>
                     </div>
                     <form method="post" action="">
+                        <?php
+                                if(isset($_POST['email']) && isset($_POST['password'])){
+                                    $check = $op->login($_POST['email'], $_POST['password']);
+                                    if($check){
+                                            $_SESSION['id'] = $check['DoctorID'];
+                                            $_SESSION['name'] = $check['Name'];
+                                            $_SESSION['email'] =  $check['Email'];
+                                            $_SESSION['specialization'] =  $check['Specialization'];
+                                            $_SESSION['login'] = true;
+                                            $_SESSION['object'] = new doctor();
+                                            header("Location: profile.php");
+                                            exit();
+                                    }else
+                                        echo '<div class="alert alert-danger" role="alert">
+                                        Wrong email or password.
+                                        </div>';
+                                }
+                            ?>
                     <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Email Address</h6>
-                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                        </label> <input class="mb-4" type="email" name="email" placeholder="Enter a valid email address" required> </div>
                     <div class="row px-3" style="margin-bottom: 10px;"> <label class="mb-1">
                             <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Password</h6>
-                        </label> <input type="password" name="password" placeholder="Enter password"> </div>
+                        </label> <input type="password" name="password" placeholder="Enter password" required> </div>
                     <div class="row px-3 mb-4">
                         <div class="col-lg-8 col-md-8 col-sm-8"> <input type="checkbox" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"> <small>Remember me</small></div> 
                         <div class="col-lg-4 col-md-4 col-sm-4"><a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a></div>
                     </div>
-                    <div class="row mb-3 px-3" style="margin-bottom: 15px; margin-top: 15px;"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
+                    <div class="row mb-3 px-3" style="margin-bottom: 15px; margin-top: 15px;"> <button type="submit" class="btn btn-blue text-center" name="login">Login</button> </div>
                     </form>
-                    <div class="row mb-4 px-3"> <small style="font-weight: bold;">Don't have an account? <a style="color: #fe5667;" href="signup.html">Register</a></small> </div>
+                    <div class="row mb-4 px-3"> <small style="font-weight: bold;">Don't have an account? <a style="color: #fe5667;" href="signup.php">Register</a></small> </div>
                 </div>
             </div>
         </div>

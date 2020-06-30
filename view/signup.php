@@ -1,3 +1,21 @@
+<?php
+include(realpath(dirname(__FILE__)).'\..\lib\autoload.php');
+use controller\guest;
+
+if(session_status()==PHP_SESSION_NONE) session_start();
+
+if(isset($_SESSION['login'])){
+    header("Location: profile.php", true, 301);
+    exit();
+}
+
+if(!isset($_SESSION['object']))
+    $_SESSION['object'] = new guest();
+
+$op = $_SESSION['object'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,28 +46,59 @@
                         <small class="or text-center" style="font-size: 100%;">Sign up</small>
                         <div class="line"></div>
                     </div>
-                    <form method="post" action="">
+                    <form method="post">
+                        <?php
+                            if(isset($_POST['register'])&&isset($_POST['name'])&&isset($_POST['email'])&&isset($_POST['password'])&&isset($_POST['vpassword'])&&isset($_POST['specialization'])){
+                            $check = $op->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['vpassword'],$_POST['specialization']);
+                                    
+                                    switch($check){
+                                        case 1:
+                                            echo '<div class="alert alert-success" role="alert">
+                                            Registered successfuly move to the login page to access your profile.
+                                            </div>';
+                                        break;
+                                        case -2;
+                                            echo '<div class="alert alert-danger" role="alert">
+                                            Password doesn\'t match.
+                                            </div>';
+                                        break;
+                                        case -1;
+                                            echo '<div class="alert alert-danger" role="alert">
+                                            Email already exist.
+                                            </div>';
+                                        break;
+                                        case -3;
+                                            echo '<div class="alert alert-danger" role="alert">
+                                            Wrong email format.
+                                            </div>';
+                                        break;
+                                    }
+                            }
+                        ?>
                     
                         <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Your Name</h6>
-                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                        </label> <input class="mb-4" type="text" name="name" placeholder="Enter your name" required> </div>
                         <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Email Address</h6>
-                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                        </label> <input class="mb-4" type="email" name="email" placeholder="Enter a valid email address" required> </div>
                     <div class="row px-3" style="margin-bottom: 10px;"> <label class="mb-1">
                             <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Password</h6>
-                        </label> <input type="password" name="password" placeholder="Enter password"> </div>
+                        </label> <input type="password" name="password" placeholder="Enter password" required> </div>
                         <div class="row px-3" style="margin-bottom: 10px;"> <label class="mb-1">
                             <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Confirm Password</h6>
-                        </label> <input type="password" name="password" placeholder="Confirm password"> </div>
+                        </label> <input type="password" name="vpassword" placeholder="Confirm password" required> </div>
+                         <div class="row px-3" style="margin-bottom: 10px;"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm" style="margin-bottom: 0px;">Specialization</h6>
+                        </label> <input type="text" name="specialization" placeholder="Enter your specialization" required> </div>
                     <div class="row px-3 mb-4">
                         <div class="col-lg-8 col-md-8 col-sm-8"> <input type="checkbox" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"> <small>Remember me</small></div> 
                         <div class="col-lg-4 col-md-4 col-sm-4"><a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a></div>
                     </div>
                         
-                    <div class="row mb-3 px-3" style="margin-bottom: 15px; margin-top: 15px;"> <button type="submit" class="btn btn-blue text-center">Sign up</button> </div>
+                    <div class="row mb-3 px-3" style="margin-bottom: 15px; margin-top: 15px;"> <button type="submit" name="register" class="btn btn-blue text-center">Sign up</button> </div>
                     </form>
-                    <div class="row mb-4 px-3"> <small style="font-weight: bold;">Already have an account? <a style="color: #4177ab;" href="login.html">Login</a></small> </div>
+                    <div class="row mb-4 px-3"> <small style="font-weight: bold;">Already have an account? <a style="color: #4177ab;" href="login.php">Login</a></small> </div>
                 </div>
             </div>
         </div>
@@ -60,10 +109,5 @@
     </div>
 </div>
         </div>
-		<script src='js/jquery-1.11.1.min.js'></script>
-		<script src='js/bootstrap.min.js'></script>
-        <script>
-            $('#main-div').hide().delay(2000).show('slow');
-        </script>
 	</body>
 </html>

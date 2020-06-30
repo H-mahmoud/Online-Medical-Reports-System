@@ -13,6 +13,10 @@ class doctor{
         $this->reportOP = new report();
     }
     
+    public function logout(){
+        session_unset();
+        session_destroy();
+    }
     
 }
 

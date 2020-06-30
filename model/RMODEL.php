@@ -2,15 +2,17 @@
 namespace MODEL;
 use Lib\PDOConnection;
 
-class report {
+class RMODEL {
     
     public static function add($name, $pname, $dob, $age, $nat, $gender, $bloodp, $pulse, $tempreture, $concolution, $mf, $date, $userid){
         
-        $sql = "INSERT INTO `report`(`ReportName`, `PatientName`, `DOB`, `Age`, `Nationality`, `Gender`, `BloodPresure`, `Pulse`, `Temperature`, `Conclusion`, `MedicalFacility`, `Date`, `DoctorID`) VALUES ('".$name."','".$pname."','".$dob."',".$age.",'".$nat."','".$gender."','".$bloodp."','".$pulse."','".$tempreture."','".$concolution."','".$mf."',".$date.", $userid)";
+        $sql = "INSERT INTO `report`(`ReportName`, `PatientName`, `DOB`, `Age`, `Nationality`, `Gender`, `BloodPresure`, `Pulse`, `Temperature`, `Conclusion`, `MedicalFacility`, `Date`, `DoctorID`) VALUES ('".$name."','".$pname."','".$dob."',".$age.",'".$nat."','".$gender."','".$bloodp."','".$pulse."','".$tempreture."','".$concolution."','".$mf."','".$date."', $userid)";
         
         try{
-            $data = PDOConnection::getInstance()->query($sql);
+            $data = PDOConnection::getInstance()->exec($sql);
+
         }catch(\PDOException $e){
+            echo $e->getMessage();
             return false;
         }
 
@@ -19,7 +21,7 @@ class report {
     
     public static function view($userid){
         
-        $sql = "SELECT * FROM `report` WHERE where doctorid = $userid";
+        $sql = "SELECT * FROM `report` WHERE DoctorID = $userid";
         
         try{
             $data = PDOConnection::getInstance()->query($sql);
@@ -30,8 +32,8 @@ class report {
         return $data;
     }
     
-    public function viewshared($userid){
-        $sql = "select * from report where reportid IN (SELECT reportid FROM `reportpermission` WHERE where doctorid = $userid)";
+    public function viewShared($userid){
+        $sql = "select * from report where ReportID IN (select ReportID from reportpermission where DoctorID = $userid)";
         
         try{
             $data = PDOConnection::getInstance()->query($sql);
@@ -44,23 +46,40 @@ class report {
     
     public static function display($id, $userid){
         
-        $sql = "SELECT * FROM `report` WHERE where doctorid = $userid and reportid = $id";
+        $sql = "SELECT * FROM `report` WHERE reportid = $id and (doctorid = $userid or (select count(*) from reportpermission where doctorid = $userid and reportid = $id ) > 0 ) ";
         
         try{
             $data = PDOConnection::getInstance()->query($sql);
+            $row = $data->fetch(\PDO::FETCH_ASSOC);
+        }catch(\PDOException $e){
+            return false;
+        }
+
+        return $row;
+    }
+    
+    public function find($name, $userid){
+
+        $sql = "SELECT * FROM `report` WHERE (patientname LIKE '%".$name."%' or reportname LIKE '%".$name."%') and doctorid = $userid";
+        
+        try{
+            $data = PDOConnection::getInstance()->query($sql);
+            
         }catch(\PDOException $e){
             return false;
         }
 
         return $data;
+        
     }
     
-    public function find($name, $userid){
+    public function findShared($name, $userid){
 
-        $sql = "SELECT * FROM `report` WHERE where (patientname = '%".$name."%' or reportname = '%".$name."%') and doctorid = $userid";
+        $sql = "SELECT * FROM `report` WHERE (patientname LIKE '%".$name."%' or reportname LIKE '%".$name."%') and ReportID IN (select ReportID from reportpermission where DoctorID = $userid)";
         
         try{
             $data = PDOConnection::getInstance()->query($sql);
+            
         }catch(\PDOException $e){
             return false;
         }
