@@ -127,9 +127,6 @@ $op = $_SESSION['object'];
                                 echo "<tr>
                                       <th scope='row' class='id' ><a href='report.php?id=".$report['ReportID']."'>".$report['ReportID']."</th>
                                         <td class='r_info'><a href='report.php?id=".$report['ReportID']."'><h4>".$report['ReportName'].".</h4></a><h5>from ".$_SESSION['name']." to ".$report['PatientName']." </h5><h5>".$report['Date']."</h5></td>
-                                        <td class='date'><form action='sharewith.php' method='post'> 
-                                        <input type='hidden' name='report_id' value ='".$report['ReportID']."' >
-                                        <button type='submit' class='btn share_btn' name='share'>Share with</button></form></td>
                                     </tr>";
                                 }
                                 echo "

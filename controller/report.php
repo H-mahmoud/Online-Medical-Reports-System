@@ -50,9 +50,12 @@ class report{
         
     } 
     
-    public function share($id, $info){
+    public function share($id, $doctorid, $userid){
         $id = (int)$id;
-        $info = (int)$info;
+        $doctorid = (int)$doctorid;
+        if(RMODEL::checkpermission($id, (int)$userid)){
+            return RMODEL::share($id, $doctorid);
+        }
         
     } 
     

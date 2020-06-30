@@ -90,24 +90,37 @@ $op = $_SESSION['object'];
                 <hr>
                 <div class="row">
                     <h3 style="text-align: center;font-weight: bold;font-family: serif;"> Share With <i class="fa fa-share-alt" aria-hidden="true"></i></h3>
-                    <form style="padding: 30px;">
-                                            <table class="table report_table">
-                      <tbody>
-                        <tr>
-                          <th scope="row" class="id" >2</th>
-                            <td class="r_info"><a><h4>COVID-19 and impact on peer review report.</h4></a><h5>from Ayman to Ahmed </h5><h5>March 30 2020</h5></td>
-                            <td class="date"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  <div class="form-group">
-    <label for="exampleInputEmail1">Email address Or ID</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">Enter doctor id or email address to share with him.</small>
-  </div>
+                    <form style="padding: 30px;" method="post">
+                        <?php
+                            if(isset($_POST['share_with'])&&isset($_POST['report_id'])&&isset($_POST['report_id'])){
+                                $check = $op->reportOP->share($_POST['report_id'],$_POST['doctor_id'], $_SESSION['id']);
+                                if($check){
+                                    echo '<div class="alert alert-success" role="alert">
+                                        Report Shared successfuly.
+                                        </div>';
+                                }else{
+                                    echo '<div class="alert alert-danger" role="alert">
+                                    Process failed please try again.
+                                    </div>';
+                                }
+                            }
+                        ?>
+                    
+                        <?php
+                            if(isset($_POST['report_id'])){
+                                echo "<h4 style='font-family: fantasy; text-align: center;' id='total_reports'>Report ID: #".(int)$_POST['report_id']."</h4>";
+                                
+                                echo"<input type='hidden' value='".(int)$_POST['report_id']."' name='report_id'>";
+                            }
+                        ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Doctor ID</label>
+                            <input type="text" class="form-control" placeholder="Enter doctor ID" name="doctor_id">
+                            <small id="emailHelp" class="form-text text-muted">Enter doctor id to share with him.</small>
+                          </div>
                         
                         <div class="row" style="text-align: end;">
-                        <input type="submit" class="btn btn-blue" value="Share Now">
+                            <input type="submit" class="btn btn-blue" value="Share Now" name="share_with">
                         </div>
                     </form>
                 </div> 

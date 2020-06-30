@@ -88,8 +88,9 @@ class RMODEL {
         
     }
     
-    public function share($id, $info){
-        $sql = "INSERT INTO `reportpermission`(`Doctor`, `ReportID`) VALUES ($id, $info)";
+    public function share($id, $doctorid){
+
+        $sql = "INSERT INTO `reportpermission`(`DoctorID`, `ReportID`) VALUES ($doctorid, $id)";
         
         try{
             $data = PDOConnection::getInstance()->exec($sql);
@@ -102,10 +103,10 @@ class RMODEL {
     } 
     
     public function checkpermission($id, $userid){
-        $sql = "(select reportid from report where reportid = $id and doctorid = $userid)";
+        $sql = "select reportid from report where reportid = $id and doctorid = $userid";
         
         try{
-            $data = PDOConnection::getInstance()->exec($sql);
+            $data = PDOConnection::getInstance()->query($sql);
         }catch(\PDOException $e){
             return false;
         }
