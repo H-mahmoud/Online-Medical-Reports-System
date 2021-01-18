@@ -7,7 +7,7 @@ keyboard and mouse.
 This system provides more efficient methods for Handling these issues, where doctors can:- 
 1. Write the medical examination reports using voice, 
 2. Browse the analysis and medication reports.
-3. share all the data of the patient with other doctors and ensure privacy of patient.
+3. Share reports of the patient with other doctors and ensure privacy of patient.
 
 
 **Images from the system:-**
