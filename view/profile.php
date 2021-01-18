@@ -29,61 +29,15 @@ $op = $_SESSION['object'];
         
 	</head>
 	<body>
-        <!--Navbar -->
-        <nav class="navbar navbar-expand-lg ">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <a class="navbar-brand" href="profile.php">Clinc System</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="addreport.php">Add new report</a>
-                    </li>
-                </ul>
-                
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <form method = "post" style = "margin-top: 5px;">
-                      <?php
-                            if(isset($_POST['logout'])){
-                                $op->logout();
-                                header("Location: login.php", true, 301);
-                            }
-                      ?>
-                      <button class="btn2 btn-danger my-2 my-sm-0" name = "logout" type="submit"> <i class="fas fa-door-open"></i></button></form>
-                </li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-        <!--/.Navbar -->
-        
+<?php include('parts/nav.php'); ?>
         
         <div class="container">
-            <!--Information-->
-            <div class="row doctor_info">
-                <div class="col-lg-3 col-md-3 col-sm-2 col-xm-6">
-                    <img src="images/doctor-profile.jpg" class="img-responsive center-block">
-                </div>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xm-6" style="padding-top: 40px;">
-                    <ul>
-                        <li style="font-weight: bold;"><?php echo $_SESSION['name'];?></li>
-                        <li><small><?php echo $_SESSION['email'];?></small></li>
-                        <li><small><?php echo $_SESSION['specialization'];?></small></li>
-                    </ul>
-                </div>
-            </div>
-            <!--Information-->
-            
+<?php include('parts/header.php'); ?>
             <!--Reports-->
             <div class="row doctor_report">
                 
                 <div class="row">
-                    <a class="se-nav"  href="profile.php" style="color: #3bbbb4;border-bottom: 3px solid #3bbbb4;"> My Reports</a>
+                    <a class="se-nav"  href="profile.php" style="color:#3e7bbe;border-bottom: 3px solid #3e7bbe;"> My Reports</a>
                     <a class="se-nav" href="shared.php"> Shared Reports</a>
                 </div>
                 

@@ -19,6 +19,21 @@ class RMODEL {
         return $data;
     }
     
+    public static function delete($userid, $id){
+        
+        $sql1 = "DELETE FROM `reportpermission` WHERE DoctorID = $userid and ReportID = $id";
+        $sql2 = "DELETE FROM `report` WHERE DoctorID = $userid and ReportID = $id";
+        
+        try{
+            $data = PDOConnection::getInstance()->exec($sql1);
+            $data = PDOConnection::getInstance()->exec($sql2);
+        }catch(\PDOException $e){
+            return false;
+        }
+
+        return $data;
+    }
+    
     public static function view($userid){
         
         $sql = "SELECT * FROM `report` WHERE DoctorID = $userid";

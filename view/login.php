@@ -31,8 +31,10 @@ $op = $_SESSION['object'];
 		<link rel='stylesheet' href='css/style.css'>
         
 	</head>
-	<body style="background-image: url(images/loginbackgrounf2.jpg); background-size: cover">
-        <div class="container" style="padding-top: 11%; ">
+	<body>
+        <?php include('parts/nav.php'); ?>
+        
+        <div class="container" style="padding-top: 5%; ">
             <div id="main-div" class="container-fluid">
     <div class="card card0 border-0" style="background-color: white;">
         <div class="row d-flex" style="padding: 5%">
@@ -76,14 +78,10 @@ $op = $_SESSION['object'];
                         <div class="col-lg-8 col-md-8 col-sm-8"> <input type="checkbox" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"> <small>Remember me</small></div> 
                         <div class="col-lg-4 col-md-4 col-sm-4"><a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a></div>
                     </div>
-                    <div class="row mb-3 px-3" style="margin-bottom: 15px; margin-top: 15px;"> <button type="submit" class="btn btn-blue text-center" name="login">Login</button> </div>
+                    <div class="row mb-3 px-3" style="margin-bottom: 15px; margin-top: 15px;"> <button type="submit" class="btn text-center" name="login" style="background-color: #3e7bbe; color: white;width: 25%;">Login</button> </div>
                     </form>
                     <div class="row mb-4 px-3"> <small style="font-weight: bold;">Don't have an account? <a style="color: #fe5667;" href="signup.php">Register</a></small> </div>
                 </div>
-            </div>
-        </div>
-        <div class="bg py-4" style="padding: 15px;text-align: center;">
-            <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2020. All rights reserved.</small>
             </div>
         </div>
     </div>

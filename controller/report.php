@@ -25,6 +25,9 @@ class report{
         
     } 
     
+    public function delete($userid, $id){
+        return RMODEL::delete($userid, $id);
+    } 
     
     public function view($userid){
         return RMODEL::view((int)$userid);

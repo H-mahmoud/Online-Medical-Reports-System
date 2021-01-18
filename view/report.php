@@ -29,56 +29,10 @@ $op = $_SESSION['object'];
         
 	</head>
 	<body>
-        <!--Navbar -->
-        <nav class="navbar navbar-expand-lg ">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <a class="navbar-brand" href="profile.php">Clinc System</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="addreport.php">Add new report</a>
-                    </li>
-                </ul>
-                
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <form method = "post" style = "margin-top: 5px;">
-                      <?php
-                            if(isset($_POST['logout'])){
-                                $op->logout();
-                                header("Location: login.php", true, 301);
-                            }
-                      ?>
-                      <button class="btn2 btn-danger my-2 my-sm-0" name = "logout" type="submit"> <i class="fas fa-door-open"></i></button></form>
-                </li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-        <!--/.Navbar -->
-        
+<?php include('parts/nav.php'); ?>
         
         <div class="container">
-            <!--Information-->
-            <div class="row doctor_info">
-                <div class="col-lg-3 col-md-3 col-sm-2 col-xm-6">
-                    <img src="images/doctor-profile.jpg" class="img-responsive center-block">
-                </div>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xm-6" style="padding-top: 40px;">
-                    <ul>
-                        <li style="font-weight: bold;"><?php echo $_SESSION['name'];?></li>
-                        <li><small><?php echo $_SESSION['email'];?></small></li>
-                        <li><small><?php echo $_SESSION['specialization'];?></small></li>
-                    </ul>
-                </div>
-            </div>
-            <!--Information-->
-            
+<?php include('parts/header.php'); ?>
             <!--Reports-->
             <div class="row doctor_report">
                 
@@ -90,7 +44,7 @@ $op = $_SESSION['object'];
                 <hr>
                 
                 
-                <div class="row" style="padding: 70px; padding-top: 0px;">
+                <div class="row" style="padding: 70px; padding-top: 0px;padding-bottom: 5px;">
                     <?php
                         if(isset($_GET['id'])){
                             $report = $op->reportOP->display($_GET['id'], $_SESSION['id']);
@@ -150,8 +104,31 @@ $op = $_SESSION['object'];
                           <th scope="row" style="width: 130px;">Doctor ID</th>
                           <td>#<?php echo $report['DoctorID']; ?></td>
                         </tr>
+                        
                       </tbody>
                     </table>
+                    
+                    <form method="get" style="wtext-align:center;margin-top:40px;">
+                        <?php if(isset($_GET['id']) && isset($_GET['delete'])) {
+                                echo "Hello";
+                                $report = $op->reportOP->delete( $_SESSION['id'], $_GET['id']);
+                                echo $report;
+                                var_dump($report);
+                                if($report){
+                                    echo '<div class="alert alert-success" role="alert">
+                                    Report deleted successfuly.
+                                    </div>';
+                                }else{
+                                    echo '<div class="alert alert-danger" role="alert">
+                                    Process failed please try again.
+                                    </div>';
+                                }
+                             } ?>
+                        <input type="hidden" value="<?php echo $_GET['id'];?>" name="id">
+                        <input type="submit" class="btn btn-blue" value="Print" name="print">
+                        <input type="submit" class="btn btn-blue" style="background-color:#ffc107;color:black" value="Edit" name="edit">
+                        <input type="submit" class="btn btn-blue" style="background-color:#dc3545;" value="Delete" name="delete">  
+                    </form>
                     <?php  
                         }
                     ?>
